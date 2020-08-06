@@ -14,7 +14,18 @@ namespace CheckoutService.Tests
             checkoutService.addProduct(new Product(8, "Milk"));
             Check check = checkoutService.closeCheck();
 
-            Assert.Equal(7, check.getTotalCost());
+            Assert.Equal(8, check.getTotalCost());
+        }
+        [Fact]
+        public void CloseCheck__WithTwoProduct(){
+            CheckoutService checkoutService = new CheckoutService();
+            checkoutService.openCheck();
+            
+            checkoutService.addProduct(new Product(8, "Milk"));
+            checkoutService.addProduct(new Product(18, "Bread"));
+            Check check = checkoutService.closeCheck();
+
+            Assert.Equal(26, check.getTotalCost());
         }
 
     }

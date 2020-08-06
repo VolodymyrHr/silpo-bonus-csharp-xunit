@@ -2,8 +2,8 @@ namespace CheckoutService
 {
     public class Product
     {
-        private int price;
-        private string name;
+        public int price;
+        public string name;
 
         public Product(int price, string name)
         {
