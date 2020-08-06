@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CheckoutService
 {
@@ -18,6 +19,11 @@ namespace CheckoutService
         internal void addProduct(Product product)
         {
             products.Add(product);
+        }
+
+        public int getTotalPoints()
+        {
+            return getTotalCost();
         }
     }
 }
