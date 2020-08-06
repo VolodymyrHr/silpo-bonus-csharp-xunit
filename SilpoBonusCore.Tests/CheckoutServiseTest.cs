@@ -28,5 +28,18 @@ namespace CheckoutService.Tests
             Assert.Equal(26, check.getTotalCost());
         }
 
+        [Fact]
+        public void AddProduct__WhenCheckIsClosed__OpenNewCheck(){
+            CheckoutService checkoutService = new CheckoutService();
+            checkoutService.openCheck();
+            
+            checkoutService.addProduct(new Product(7, "Milk"));
+            Check milkCheck = checkoutService.closeCheck();
+            Assert.Equal(7, milkCheck.getTotalCost());
+            
+            checkoutService.addProduct(new Product(3, "Bread"));
+            Check breadCheck = checkoutService.closeCheck();
+            Assert.Equal(3, breadCheck.getTotalCost());
+        }
     }
 }
