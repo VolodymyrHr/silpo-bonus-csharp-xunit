@@ -41,5 +41,10 @@ namespace CheckoutService.Tests
             Check breadCheck = checkoutService.closeCheck();
             Assert.Equal(3, breadCheck.getTotalCost());
         }
+
+        // [Fact]
+        // public void closeCheck__calckTotalPoints(){
+
+        // }
     }
 }
