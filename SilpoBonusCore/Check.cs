@@ -6,6 +6,7 @@ namespace CheckoutService
     public class Check
     {
         private List<Product> products = new List<Product>();
+        private int points = 0;
 
         public int getTotalCost()
         {
@@ -23,7 +24,12 @@ namespace CheckoutService
 
         public int getTotalPoints()
         {
-            return getTotalCost();
+            return getTotalCost() + points;
+        }
+
+        internal void addPoints(int points)
+        {
+            this.points += points;
         }
     }
 }

@@ -19,7 +19,6 @@ namespace CheckoutService
                 openCheck();
             }
         }
-
         public void addProduct(Product product)
         {
             AvtoOpenCheck();
@@ -30,6 +29,12 @@ namespace CheckoutService
         {
             checkStatus = true;
             return check;
+        }
+
+        public void useOffer(AnyGoodsOffer offer)
+        {
+            if(offer.totalCost <= check.getTotalCost())
+            check.addPoints(offer.points);
         }
     }
 }
