@@ -13,8 +13,8 @@ namespace CheckoutService.Tests
         public CheckoutServiceTest(){
             checkoutService = new CheckoutService();
             checkoutService.openCheck();
-            milck_7 = new Product(7, "Milk");
-            bread_3 = new Product(3, "Bread");
+            milck_7 = new Product(7, "Milk", Category.MILK);
+            bread_3 = new Product(3, "Bread", Category.BREAD);
         }
 
         [Fact]
@@ -60,7 +60,6 @@ namespace CheckoutService.Tests
             checkoutService.addProduct(bread_3);
 
             checkoutService.useOffer(new AnyGoodsOffer(6, 2));
-
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(12, check.getTotalPoints());
@@ -75,6 +74,18 @@ namespace CheckoutService.Tests
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(3, check.getTotalPoints());
+        }
+
+        [Fact]
+        public void UseOffer__factorByCategory(){
+            checkoutService.addProduct(milck_7);
+            checkoutService.addProduct(milck_7);
+            checkoutService.addProduct(bread_3);
+
+            checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2));
+            Check check = checkoutService.closeCheck();
+
+            Assert.Equal(31, check.getTotalPoints());
         }
     }
 }

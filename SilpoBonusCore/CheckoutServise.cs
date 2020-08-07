@@ -14,8 +14,10 @@ namespace CheckoutService
             check = new Check();
         }
 
-        private void AvtoOpenCheck(){
-            if(checkStatus){
+        private void AvtoOpenCheck()
+        {
+            if (checkStatus)
+            {
                 openCheck();
             }
         }
@@ -31,10 +33,9 @@ namespace CheckoutService
             return check;
         }
 
-        public void useOffer(AnyGoodsOffer offer)
+        public void useOffer(Offers offer)
         {
-            if(offer.totalCost <= check.getTotalCost())
-            check.addPoints(offer.points);
+            offer.Apply(check);
         }
     }
 }

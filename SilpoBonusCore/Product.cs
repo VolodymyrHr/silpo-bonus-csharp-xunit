@@ -4,6 +4,14 @@ namespace CheckoutService
     {
         public int price;
         public string name;
+        public Category category;
+
+        public Product(int price, string name, Category category)
+        {
+            this.price = price;
+            this.name = name;
+            this.category = category;
+        }
 
         public Product(int price, string name)
         {
