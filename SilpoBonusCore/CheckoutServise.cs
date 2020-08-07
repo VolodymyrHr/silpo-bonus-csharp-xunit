@@ -8,6 +8,8 @@ namespace CheckoutService
         private Check check;
         private bool checkStatus;
 
+        private Offers offers = null;
+
         public void openCheck()
         {
             checkStatus = false;
@@ -30,12 +32,15 @@ namespace CheckoutService
         public Check closeCheck()
         {
             checkStatus = true;
+            if (offers != null){
+                offers.Apply(check);
+            }
             return check;
         }
 
         public void useOffer(Offers offer)
         {
-            offer.Apply(check);
+            offers = offer;
         }
     }
 }

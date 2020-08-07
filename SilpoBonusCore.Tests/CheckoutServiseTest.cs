@@ -4,13 +4,15 @@ using Xunit;
 namespace CheckoutService.Tests
 {
 
-    public class CheckoutServiceTest{
+    public class CheckoutServiceTest
+    {
 
         private Product milck_7;
         private Product bread_3;
         private CheckoutService checkoutService;
 
-        public CheckoutServiceTest(){
+        public CheckoutServiceTest()
+        {
             checkoutService = new CheckoutService();
             checkoutService.openCheck();
             milck_7 = new Product(7, "Milk", Category.MILK);
@@ -18,15 +20,17 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void CloseCheck__WithOneProduct(){
-            
+        public void CloseCheck__WithOneProduct()
+        {
+
             checkoutService.addProduct(milck_7);
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(7, check.getTotalCost());
         }
         [Fact]
-        public void CloseCheck__WithTwoProduct(){
+        public void CloseCheck__WithTwoProduct()
+        {
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
             Check check = checkoutService.closeCheck();
@@ -35,18 +39,20 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void AddProduct__WhenCheckIsClosed__OpenNewCheck(){            
+        public void AddProduct__WhenCheckIsClosed__OpenNewCheck()
+        {
             checkoutService.addProduct(milck_7);
             Check milkCheck = checkoutService.closeCheck();
             Assert.Equal(7, milkCheck.getTotalCost());
-            
+
             checkoutService.addProduct(bread_3);
             Check breadCheck = checkoutService.closeCheck();
             Assert.Equal(3, breadCheck.getTotalCost());
         }
 
         [Fact]
-        public void closeCheck__calckTotalPoints(){
+        public void closeCheck__calckTotalPoints()
+        {
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
             Check check = checkoutService.closeCheck();
@@ -55,7 +61,8 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void UseOffer__AddOfferPoints(){
+        public void UseOffer__AddOfferPoints()
+        {
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
 
@@ -66,7 +73,8 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void UseOffer__WhenCostLessThenRequired__DoNothing(){
+        public void UseOffer__WhenCostLessThenRequired__DoNothing()
+        {
             checkoutService.addProduct(bread_3);
 
             checkoutService.useOffer(new AnyGoodsOffer(6, 2));
@@ -77,7 +85,8 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void UseOffer__factorByCategory(){
+        public void UseOffer__factorByCategory()
+        {
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
@@ -86,6 +95,21 @@ namespace CheckoutService.Tests
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(31, check.getTotalPoints());
+        }
+
+        [Fact]
+        public void UseOffer__BeforeCloseCheck__AddOfferPoints()
+        {
+            checkoutService.addProduct(milck_7);
+            checkoutService.addProduct(milck_7);
+
+            checkoutService.useOffer(new AnyGoodsOffer(15, 2));
+
+            checkoutService.addProduct(bread_3);
+
+            Check check = checkoutService.closeCheck();
+
+            Assert.Equal(19, check.getTotalPoints());
         }
     }
 }
