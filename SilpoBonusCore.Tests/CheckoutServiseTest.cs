@@ -66,7 +66,7 @@ namespace CheckoutService.Tests
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
 
-            checkoutService.useOffer(new AnyGoodsOffer(6, 2));
+            checkoutService.useOffer(new AnyGoodsOffer("20-08-2020", 6, 2));
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(12, check.getTotalPoints());
@@ -77,7 +77,7 @@ namespace CheckoutService.Tests
         {
             checkoutService.addProduct(bread_3);
 
-            checkoutService.useOffer(new AnyGoodsOffer(6, 2));
+            checkoutService.useOffer(new AnyGoodsOffer("20-08-2020", 6, 2));
 
             Check check = checkoutService.closeCheck();
 
@@ -91,7 +91,7 @@ namespace CheckoutService.Tests
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(bread_3);
 
-            checkoutService.useOffer(new FactorByCategoryOffer(Category.MILK, 2));
+            checkoutService.useOffer(new FactorByCategoryOffer("20-08-2020", Category.MILK, 2));
             Check check = checkoutService.closeCheck();
 
             Assert.Equal(31, check.getTotalPoints());
@@ -103,7 +103,7 @@ namespace CheckoutService.Tests
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(milck_7);
 
-            checkoutService.useOffer(new AnyGoodsOffer(15, 2));
+            checkoutService.useOffer(new AnyGoodsOffer("20-08-2020", 15, 2));
 
             checkoutService.addProduct(bread_3);
 
@@ -113,18 +113,18 @@ namespace CheckoutService.Tests
         }
 
         [Fact]
-        public void UseOffer__CheckExpirationDate__AfterTodayDate()
+        public void UseOffer__CheckExpirationDate()
         {
             checkoutService.addProduct(milck_7);
             checkoutService.addProduct(milck_7);
 
-            checkoutService.useOffer(new AnyGoodsOffer(15, 2, "20-08-2020"));
+            checkoutService.useOffer(new AnyGoodsOffer("07-08-2020", 15, 2));
 
             checkoutService.addProduct(bread_3);
 
             Check check = checkoutService.closeCheck();
             
-            Assert.Equal(19, check.getTotalPoints());
+            Assert.Equal(17, check.getTotalPoints());
         }
     }
 }

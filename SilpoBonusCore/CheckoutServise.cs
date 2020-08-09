@@ -32,7 +32,7 @@ namespace CheckoutService
         {
             checkStatus = true;
             if (offers != null){
-                offers.Apply(check);
+                offers.GetOffer(check);
             }
             return check;
         }

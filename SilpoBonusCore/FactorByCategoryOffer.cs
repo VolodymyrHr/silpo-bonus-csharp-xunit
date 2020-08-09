@@ -5,7 +5,7 @@ namespace CheckoutService
         public Category category;
         public int factor;
 
-        public FactorByCategoryOffer(Category category, int factor)
+        public FactorByCategoryOffer(string date, Category category, int factor) : base(date)
         {
             this.category = category;
             this.factor = factor;

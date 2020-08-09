@@ -6,18 +6,11 @@ namespace CheckoutService
     {
         public int totalCost;
         public int points;
-
-        DateTime date;
-        public AnyGoodsOffer(int totalCost, int points)
+        public AnyGoodsOffer(string date, int totalCost, int points) :base(date)
         {
             this.totalCost = totalCost;
             this.points = points;
         }
-        public AnyGoodsOffer(int totalCost, int points, string date)
-        {
-            this.date = DateTime.Parse(date);
-        }
-
 
         public override void Apply(Check check)
         {
