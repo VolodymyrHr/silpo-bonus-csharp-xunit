@@ -7,7 +7,6 @@ namespace CheckoutService
     {
         private Check check;
         private bool checkStatus;
-
         private Offers offers = null;
 
         public void openCheck()

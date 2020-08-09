@@ -111,5 +111,20 @@ namespace CheckoutService.Tests
 
             Assert.Equal(19, check.getTotalPoints());
         }
+
+        [Fact]
+        public void UseOffer__CheckExpirationDate__AfterTodayDate()
+        {
+            checkoutService.addProduct(milck_7);
+            checkoutService.addProduct(milck_7);
+
+            checkoutService.useOffer(new AnyGoodsOffer(15, 2, "20-08-2020"));
+
+            checkoutService.addProduct(bread_3);
+
+            Check check = checkoutService.closeCheck();
+            
+            Assert.Equal(19, check.getTotalPoints());
+        }
     }
 }
